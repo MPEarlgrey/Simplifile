@@ -1,3 +1,4 @@
+#Initialize swift
 import Foundation 
 
   
@@ -5,6 +6,7 @@ import Foundation
 let fileManager = FileManager.default 
 
   
+# Determine target folder from command line or user input
 
 let targetPath: String 
 
@@ -27,12 +29,14 @@ if CommandLine.arguments.count > 1 {
 } 
 
   
+# Expand tilde and validate path
 
 let expandedPath = (targetPath as NSString).expandingTildeInPath 
 
 let targetURL = URL(fileURLWithPath: expandedPath) 
 
   
+# Check if path exists and is a directory
 
 var isDirectory: ObjCBool = false 
 
@@ -45,6 +49,7 @@ guard fileManager.fileExists(atPath: expandedPath, isDirectory: &isDirectory), i
 } 
 
   
+# Define file type categories and their associated extensions
 
 let typeFolders: [String: [String]] = [ 
 
@@ -73,6 +78,7 @@ let typeFolders: [String: [String]] = [
 ] 
 
   
+# Create a reverse lookup for extensions to categories
 
 var extensionMap: [String: String] = [:] 
 
@@ -87,10 +93,12 @@ for (category, exts) in typeFolders {
 } 
 
   
+# Start organizing files
 
 print("Organizing: \(expandedPath)\n") 
 
   
+# Process each file in the target directory
 
 do { 
 
@@ -199,3 +207,5 @@ do {
     exit(1) 
 
 } 
+
+# End of script
